@@ -1,0 +1,10 @@
+Package: binplot2
+Type: Package
+Title: Plotting bin plot
+Version: 0.1.0
+Author: Me
+Maintainer: Me <jw1121@scarletmail.rutgers.edu>
+Description: testing
+License: LGPL
+Encoding: UTF-8
+LazyData: true
