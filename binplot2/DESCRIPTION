@@ -1,10 +1,10 @@
 Package: binplot2
 Type: Package
-Title: Plotting bin plot
+Title: Binplot and Scatter histogram
 Version: 0.1.0
-Author: Me
-Maintainer: Me <jw1121@scarletmail.rutgers.edu>
-Description: testing
+Author: Jing Wang, Po Yuan Huang, Fan Yang
+Maintainer:  Jing Wang <jw1121@scarletmail.rutgers.edu>
+Description: This package contains two functions, which is implementing binplot and scatter histogram from two variables. 
 License: LGPL
 Encoding: UTF-8
 LazyData: true

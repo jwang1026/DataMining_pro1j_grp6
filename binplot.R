@@ -5,6 +5,8 @@ binplot <- function(x,y,nr=20,nc=20, scale="raw") {
   zy[zy>nc] = nc
   z = table(zx,zy); z[,1]=z[,1]-1; z[1,]=z[1,]-1;
   if (scale=="l") z= log(1+z)
+  else if (scale =="r") z=2*z
+  else if (scale == "t") z = z^2
   image(z=t(z),x=seq(length=nr+1,from=min(x),to=max(x)),
         y= seq(length=nc+1,from=min(y),to=max(y)),
         xlab="",ylab="", col=topo.colors(100))

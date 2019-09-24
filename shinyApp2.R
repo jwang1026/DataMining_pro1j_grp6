@@ -2,10 +2,10 @@ library(binplot2)
 library(shiny)
 
 #simulate data;
-x = rnorm(10000) ; y = rnorm(10000)
-ux = rnorm(5000)/3
-uy = ux^2 -0.5
-D<-data.frame(y,uy,x,ux)
+#x = rnorm(10000) ; y = rnorm(10000)
+#ux = rnorm(5000)/3
+#uy = ux^2 -0.5
+#D<-data.frame(y,uy,x,ux)
 #write.table(D,file="temp.txt",sep=",",row.names = FALSE,col.names = FALSE,)
 
 
@@ -14,7 +14,7 @@ ui <- fluidPage(
   titlePanel("Binplot panel"),
   sidebarLayout(position = "left",
                 sidebarPanel("Setting Parameters",
-                             h2('The uploaded file data'),
+                             h2('Please upload data file.'),
                              dataTableOutput('mytable'),
                              fileInput('file', 'Choose info-file to upload',
                                        accept = c(
@@ -26,7 +26,6 @@ ui <- fluidPage(
                                          '.tsv'
                                        )
                              ),
-                             # Taken from: http://shiny.rstudio.com/gallery/file-upload.html
                              tags$hr(),
                              checkboxInput('header', 'Header', TRUE),
                              radioButtons('sep', 'Separator',
@@ -39,10 +38,16 @@ ui <- fluidPage(
                                             'Double Quote'='"',
                                             'Single Quote'="'"),
                                           '"'),
+                            
+                             radioButtons('colorScale', 'Please choose the function for the Color Scale in the binplot.',
+                                          c(
+                                            'z=log(1+z)'='l',
+                                            'z=2*z'='r',
+                                            'z=z^2'='t'),'raw'),
                              ################################################################
                              
                              sliderInput(inputId="nrnc",
-                                         label="Choose a number for variables nr and nc in the binplot!",
+                                         label="Pleease choose a number for variables nr and nc in the binplot.",
                                          value=1,min=1,max=1000),
                             
                      
@@ -190,7 +195,7 @@ server <- function(input, output, session) { # added session for updateSelectInp
     f3 <- info3()
     x <- subset(f3, select = input$column3)
     
-    binplot(unlist(y), unlist(x),nr=input$nrnc, nc=input$nrnc, "l")
+    binplot(unlist(y), unlist(x),nr=input$nrnc, nc=input$nrnc, scale=input$colorScale)
     
   })
   
@@ -201,11 +206,6 @@ server <- function(input, output, session) { # added session for updateSelectInp
     y <- subset(f6, select = input$column6)
     scatterhist(unlist(x),unlist(y))
   })
-  
-  
-  
-  
-  
 }
 
 shinyApp(ui, server)
